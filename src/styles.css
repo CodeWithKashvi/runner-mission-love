@@ -107,6 +107,10 @@ button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2
 .auth-warning { margin-top: 18px; color: var(--muted-foreground); font-size: 9px; }
 
 .access-scene { display: grid; place-items: center; }
+.access-scene .terminal-panel { position: relative; z-index: 2; }
+.access-runner { position: absolute; inset: 82px 5vw 42px auto; width: min(42vw, 520px); opacity: .22; filter: saturate(.65); }
+.access-runner .runner-visual { height: 100%; border: 0; }
+.access-runner .runner-tag { display: none; }
 .sequence-wrap { min-height: 250px; }
 .sequence-lines { min-height: 180px; }
 .sequence-lines p { margin: 0 0 11px; color: var(--foreground); font-size: clamp(10px, 1.1vw, 13px); animation: line-in .18s ease both; }
@@ -189,6 +193,7 @@ dt { color: var(--muted-foreground); } dd { margin: 0; color: var(--foreground);
   .hud-topbar { top: 10px; left: 12px; right: 12px; }.hud-footer { left: 12px; right: 12px; bottom: 7px; }.hud-footer span:nth-child(2) { display: none; }.hud-corner { display: none; }
   .mission-tracker { top: 50px; left: 12px; right: 12px; width: auto; padding: 7px 8px; border: 0; border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--background) 88%, transparent); }.tracker-title { padding-bottom: 5px; }.tracker-rail { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }.tracker-item { display: grid; grid-template-columns: 1fr; gap: 0; justify-items: center; padding-top: 4px; }.tracker-label { display: none; }
   .scene-content { padding: 110px 18px 42px; }.scene-auth .scene-content { padding-top: 62px; }
+  .access-runner { inset: 88px 0 35px auto; width: 68vw; opacity: .15; }
   .split-scene, .split-scene.reverse { grid-template-columns: 1fr; gap: 16px; align-items: end; }.split-scene .runner-visual { position: absolute; z-index: 0; inset: 80px 0 34px auto; width: 62%; height: auto; opacity: .55; }.split-scene .runner-visual::after { background: linear-gradient(90deg, var(--background), transparent 22%), linear-gradient(0deg, var(--background), transparent 38%), linear-gradient(180deg, var(--background), transparent 25%); }.split-scene.reverse .runner-visual { inset: 80px auto 34px 0; }.split-scene.reverse .runner-visual::after { background: linear-gradient(-90deg, var(--background), transparent 22%), linear-gradient(0deg, var(--background), transparent 38%), linear-gradient(180deg, var(--background), transparent 25%); }.runner-tag { display: none; }
   .brief-copy, .ascent-copy, .memory-discovery > div:first-child, .final-brief > div:last-child { max-width: 90%; }.split-scene.reverse .ascent-copy, .split-scene.reverse.final-brief > div:last-child { margin-left: auto; width: 88%; }
   .scene-content h1 { font-size: clamp(50px, 18vw, 82px); }.scene-content h2 { font-size: clamp(40px, 14vw, 68px); }

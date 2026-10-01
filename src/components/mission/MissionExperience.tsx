@@ -300,7 +300,7 @@ export function MissionExperience() {
   const current = useMemo(() => {
     switch (scene) {
       case "auth": return <Authentication onSuccess={() => go("access")} tone={audio.tone} />;
-      case "access": return <div className="access-scene scene-content"><TerminalPanel label="ROOT ACCESS // VERIFIED"><LoadingSequence lines={accessLines} onComplete={advance} /></TerminalPanel></div>;
+      case "access": return <div className="access-scene scene-content"><div className="access-runner"><RunnerVisual compact /></div><TerminalPanel label="ROOT ACCESS // VERIFIED"><LoadingSequence lines={accessLines} onComplete={advance} /></TerminalPanel></div>;
       case "briefing": return <Briefing next={advance} />;
       case "ascension": return <Ascension next={advance} />;
       case "memory": return <MemoryReveal next={advance} />;
