@@ -89,7 +89,9 @@ function useAudioSystem() {
     });
   };
 
-  useEffect(() => () => contextRef.current?.close(), []);
+  useEffect(() => () => {
+    void contextRef.current?.close();
+  }, []);
   return { enabled, toggle, tone };
 }
 
@@ -229,6 +231,7 @@ function LetterScene({ next }: { next: () => void }) {
   useEffect(() => {
     if (visible >= LOVE_LETTER.length) return;
     const current = LOVE_LETTER[visible - 1];
+    if (!current) return;
     const delay = Math.max(420, Math.min(1450, current.length * SEQUENCE_TIMINGS.typeCharacter));
     const timer = window.setTimeout(() => setVisible((value) => value + 1), delay);
     return () => window.clearTimeout(timer);
@@ -248,6 +251,7 @@ function LetterScene({ next }: { next: () => void }) {
 
 function MemoryGallery({ next }: { next: () => void }) {
   const [selected, setSelected] = useState<number | null>(null);
+  const selectedMemory = selected === null ? null : MEMORY_ITEMS[selected];
   useEffect(() => {
     if (selected === null) return;
     const close = (event: KeyboardEvent) => { if (event.key === "Escape") setSelected(null); };
@@ -255,7 +259,7 @@ function MemoryGallery({ next }: { next: () => void }) {
     return () => window.removeEventListener("keydown", close);
   }, [selected]);
   return (
-    <div className="archive-scene scene-content"><div className="scene-heading"><p className="eyebrow">ACCESS LEVEL: KASHVI</p><h2>MEMORY<br />ARCHIVE</h2><span>03 RECOVERY SLOTS // READY</span></div><div className="memory-grid">{MEMORY_ITEMS.map((memory, index) => <button key={memory.id} className="memory-card" onClick={() => setSelected(index)}><div className="memory-placeholder"><span>{String(index + 1).padStart(2, "0")}</span><LockKeyhole size={22} /><i>AWAITING IMAGE</i></div><div><b>{memory.id}</b><span>RECOVERED</span><small>STATUS: STABLE // DATE: {memory.date}</small></div><Maximize2 size={17} /></button>)}</div><ActionButton onClick={next}>OPEN MISSION LOG</ActionButton>{selected !== null && <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${MEMORY_ITEMS[selected].id} preview`}><button className="close-button" onClick={() => setSelected(null)} aria-label="Close memory"><X /></button><div className="lightbox-memory"><div className="memory-placeholder"><span>{String(selected + 1).padStart(2, "0")}</span><LockKeyhole size={34} /><i>REPLACE WITH YOUR PHOTO</i></div><h3>{MEMORY_ITEMS[selected].id} // RECOVERED</h3><p>{MEMORY_ITEMS[selected].caption}</p></div></div>}</div>
+    <div className="archive-scene scene-content"><div className="scene-heading"><p className="eyebrow">ACCESS LEVEL: KASHVI</p><h2>MEMORY<br />ARCHIVE</h2><span>03 RECOVERY SLOTS // READY</span></div><div className="memory-grid">{MEMORY_ITEMS.map((memory, index) => <button key={memory.id} className="memory-card" onClick={() => setSelected(index)}><div className="memory-placeholder"><span>{String(index + 1).padStart(2, "0")}</span><LockKeyhole size={22} /><i>AWAITING IMAGE</i></div><div><b>{memory.id}</b><span>RECOVERED</span><small>STATUS: STABLE // DATE: {memory.date}</small></div><Maximize2 size={17} /></button>)}</div><ActionButton onClick={next}>OPEN MISSION LOG</ActionButton>{selectedMemory && selected !== null && <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${selectedMemory.id} preview`}><button className="close-button" onClick={() => setSelected(null)} aria-label="Close memory"><X /></button><div className="lightbox-memory"><div className="memory-placeholder"><span>{String(selected + 1).padStart(2, "0")}</span><LockKeyhole size={34} /><i>REPLACE WITH YOUR PHOTO</i></div><h3>{selectedMemory.id} // RECOVERED</h3><p>{selectedMemory.caption}</p></div></div>}</div>
   );
 }
 
@@ -284,7 +288,8 @@ export function MissionExperience() {
   };
   const advance = () => {
     const index = sceneOrder.indexOf(scene);
-    if (index < sceneOrder.length - 1) go(sceneOrder[index + 1]);
+    const nextScene = sceneOrder[index + 1];
+    if (nextScene) go(nextScene);
   };
   const current = useMemo(() => {
     switch (scene) {
