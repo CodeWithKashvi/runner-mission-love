@@ -155,14 +155,16 @@ function RunnerVisual({ compact = false }: { compact?: boolean }) {
 
 function LoadingSequence({ lines, onComplete, showAccessResult = true }: { lines: readonly string[]; onComplete: () => void; showAccessResult?: boolean }) {
   const [shown, setShown] = useState(0);
+  const completedRef = useRef(false);
   useEffect(() => {
     if (shown >= lines.length) return;
-    const timer = window.setTimeout(() => setShown((value) => {
-      const next = value + 1;
-      if (next >= lines.length && !showAccessResult) onComplete();
-      return next;
-    }), SEQUENCE_TIMINGS.accessLine);
+    const timer = window.setTimeout(() => setShown((value) => value + 1), SEQUENCE_TIMINGS.accessLine);
     return () => window.clearTimeout(timer);
+  }, [shown, lines.length]);
+  useEffect(() => {
+    if (shown < lines.length || showAccessResult || completedRef.current) return;
+    completedRef.current = true;
+    onComplete();
   }, [shown, lines.length, showAccessResult, onComplete]);
   return (
     <div className="sequence-wrap">
