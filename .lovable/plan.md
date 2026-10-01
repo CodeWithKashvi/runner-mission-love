@@ -10,10 +10,12 @@
 - Validate `KASHVI` case-insensitively and show the three escalating wrong-password messages without revealing it.
 - Add a persistent, subtle Tower Ascension tracker that marks completed, current, and locked stages without resembling website navigation.
 - Animate staged loading sequences, terminal typing, the classified anniversary reveal, progressive paragraph-by-paragraph letter decryption, expandable mission entries, a photo-memory lightbox, and restart back to authentication.
+- Add a persistent sound on/off control with synthesized ambient, terminal, authentication, decryption, glitch, and transition cues that starts only after user interaction and remains optional.
+- Place the short personalized `KASHVI` weakness and dependency system analyses after the emotional section without turning the experience into comedy.
 - Keep controls keyboard-accessible and motion reduced when the visitor requests reduced motion.
 
 ## Editable content
-- Centralize the love letter, anniversary dates, mission entries, memory placeholders, labels, and sequence timings in clearly named data blocks.
+- Centralize the intact love letter, anniversary dates, mission entries, memory placeholders, funny system messages, labels, character settings, audio settings, and sequence timings in clearly named data blocks.
 - Build reusable terminal, tracker HUD, glitch text, loading sequence, typewriter, memory gallery, mission card, recurring character, and final-message pieces.
 
 ## Technical details
