@@ -153,20 +153,24 @@ function RunnerVisual({ compact = false }: { compact?: boolean }) {
   );
 }
 
-function LoadingSequence({ lines, onComplete }: { lines: readonly string[]; onComplete: () => void }) {
+function LoadingSequence({ lines, onComplete, showAccessResult = true }: { lines: readonly string[]; onComplete: () => void; showAccessResult?: boolean }) {
   const [shown, setShown] = useState(0);
   useEffect(() => {
     if (shown >= lines.length) return;
-    const timer = window.setTimeout(() => setShown((value) => value + 1), SEQUENCE_TIMINGS.accessLine);
+    const timer = window.setTimeout(() => setShown((value) => {
+      const next = value + 1;
+      if (next >= lines.length && !showAccessResult) onComplete();
+      return next;
+    }), SEQUENCE_TIMINGS.accessLine);
     return () => window.clearTimeout(timer);
-  }, [shown, lines.length]);
+  }, [shown, lines.length, showAccessResult, onComplete]);
   return (
     <div className="sequence-wrap">
       <div className="sequence-lines" aria-live="polite">
         {lines.slice(0, shown).map((line) => <p key={line}><span>›</span> {line}</p>)}
         {shown < lines.length && <span className="cursor" />}
       </div>
-      {shown >= lines.length && <div className="sequence-result"><GlitchText className="result-title">ACCESS GRANTED.</GlitchText><p>WELCOME, RUNNER.</p><ActionButton onClick={onComplete}>ENTER NETWORK</ActionButton></div>}
+      {shown >= lines.length && showAccessResult && <div className="sequence-result"><GlitchText className="result-title">ACCESS GRANTED.</GlitchText><p>WELCOME, RUNNER.</p><ActionButton onClick={onComplete}>ENTER NETWORK</ActionButton></div>}
     </div>
   );
 }
@@ -211,7 +215,7 @@ function Ascension({ next }: { next: () => void }) {
   return (
     <div className="split-scene reverse scene-content">
       <RunnerVisual compact />
-      <div className="ascent-copy"><p className="eyebrow">LEVEL 04 // TOWER UPLINK</p><h2>TOWER<br />ASCENSION</h2><TerminalPanel label="LIVE_PROCESS // ELEVATION"><LoadingSequence lines={ascentLines} onComplete={() => setComplete(true)} /></TerminalPanel>{complete && <ActionButton onClick={next}>ACCESS MEMORY CORE</ActionButton>}</div>
+      <div className="ascent-copy"><p className="eyebrow">LEVEL 04 // TOWER UPLINK</p><h2>TOWER<br />ASCENSION</h2><TerminalPanel label="LIVE_PROCESS // ELEVATION"><LoadingSequence lines={ascentLines} onComplete={() => setComplete(true)} showAccessResult={false} /></TerminalPanel>{complete && <ActionButton onClick={next}>ACCESS MEMORY CORE</ActionButton>}</div>
     </div>
   );
 }
