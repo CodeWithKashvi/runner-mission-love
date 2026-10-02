@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ChevronDown, LockKeyhole, Maximize2, Volume2, VolumeX, X } from "lucide-react";
+import { ChevronDown, Volume2, VolumeX } from "lucide-react";
 import runnerImage from "../../assets/runner-tower.jpg";
 import {
   CHARACTER_CONFIG,
@@ -256,16 +256,37 @@ function LetterScene({ next }: { next: () => void }) {
 }
 
 function MemoryGallery({ next }: { next: () => void }) {
-  const [selected, setSelected] = useState<number | null>(null);
-  const selectedMemory = selected === null ? null : MEMORY_ITEMS[selected];
-  useEffect(() => {
-    if (selected === null) return;
-    const close = (event: KeyboardEvent) => { if (event.key === "Escape") setSelected(null); };
-    window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
-  }, [selected]);
   return (
-    <div className="archive-scene scene-content"><div className="scene-heading"><p className="eyebrow">ACCESS LEVEL: KASHVI</p><h2>MEMORY<br />ARCHIVE</h2><span>03 RECOVERY SLOTS // READY</span></div><div className="memory-grid">{MEMORY_ITEMS.map((memory, index) => <button key={memory.id} className="memory-card" onClick={() => setSelected(index)}><div className="memory-placeholder"><span>{String(index + 1).padStart(2, "0")}</span><LockKeyhole size={22} /><i>AWAITING IMAGE</i></div><div><b>{memory.id}</b><span>RECOVERED</span><small>STATUS: STABLE // DATE: {memory.date}</small></div><Maximize2 size={17} /></button>)}</div><ActionButton onClick={next}>OPEN MISSION LOG</ActionButton>{selectedMemory && selected !== null && <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${selectedMemory.id} preview`}><button className="close-button" onClick={() => setSelected(null)} aria-label="Close memory"><X /></button><div className="lightbox-memory"><div className="memory-placeholder"><span>{String(selected + 1).padStart(2, "0")}</span><LockKeyhole size={34} /><i>REPLACE WITH YOUR PHOTO</i></div><h3>{selectedMemory.id} // RECOVERED</h3><p>{selectedMemory.caption}</p></div></div>}</div>
+    <div className="archive-scene scene-content">
+      <div className="scene-heading">
+        <p className="eyebrow">ACCESS LEVEL: KASHVI</p>
+        <h2>MEMORY<br />ARCHIVE</h2>
+        <span>03 RECOVERY SLOTS // READY</span>
+      </div>
+
+      <div className="memory-grid">
+        {MEMORY_ITEMS.map((memory, index) => (
+          <div key={memory.id} className="memory-card">
+            <div className="memory-placeholder">
+              <img
+                src={memory.image}
+                alt={memory.id}
+                className="memory-card-image"
+              />
+              <span>{String(index + 1).padStart(2, "0")}</span>
+            </div>
+
+            <div>
+              <b>{memory.id}</b>
+              <span>RECOVERED</span>
+              <small>STATUS: STABLE // DATE: {memory.date}</small>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <ActionButton onClick={next}>OPEN MISSION LOG</ActionButton>
+    </div>
   );
 }
 

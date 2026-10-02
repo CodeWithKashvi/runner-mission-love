@@ -164,7 +164,21 @@ dt { color: var(--muted-foreground); } dd { margin: 0; color: var(--foreground);
 .memory-card > div:nth-child(2) { display: grid; gap: 4px; padding: 12px; }.memory-card > div:nth-child(2) b { color: var(--foreground); font-size: 11px; }.memory-card > div:nth-child(2) span { color: var(--cyan-glow); font-size: 9px; }.memory-card small { color: var(--muted-foreground); font-size: 7px; }.memory-card > svg { display: none; }
 .archive-scene > .action-button, .mission-log > .action-button { grid-column: 2; justify-self: start; }
 .lightbox { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 54px 20px 20px; background: oklch(0.04 0.01 250 / 96%); backdrop-filter: blur(14px); animation: scene-in .35s ease; }
-.close-button { position: absolute; top: 24px; right: 24px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--border); background: var(--panel); color: var(--foreground); cursor: pointer; }.lightbox-memory { width: min(90vw, 560px); text-align: center; }.lightbox-memory .memory-placeholder { max-height: 68vh; aspect-ratio: 4/3; }.lightbox-memory h3 { color: var(--cyan-glow); font-size: 13px; }.lightbox-memory p { color: var(--muted-foreground); font-size: 10px; }
+.close-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--foreground);
+  cursor: pointer;
+  pointer-events: auto;
+}
 
 .mission-list { align-self: center; max-height: 62vh; overflow-y: auto; border-top: 1px solid var(--border); }
 .mission-entry { border-bottom: 1px solid var(--border); }.mission-entry button { display: grid; grid-template-columns: 100px minmax(0,1fr) 22px; width: 100%; align-items: center; gap: 18px; min-height: 58px; padding: 0 14px; border: 0; background: transparent; color: var(--foreground); text-align: left; cursor: pointer; }.mission-entry button span { color: var(--primary); font-size: 9px; }.mission-entry button b { font-family: var(--font-sans); font-size: clamp(15px, 2vw, 22px); }.mission-entry button svg { transition: transform .25s; }.mission-entry.open button svg { transform: rotate(180deg); }.mission-description { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }.mission-description p { min-height: 0; overflow: hidden; margin: 0; padding: 0 132px 0; color: var(--muted-foreground); font-family: var(--font-sans); font-size: 15px; line-height: 1.5; }.mission-entry.open .mission-description { grid-template-rows: 1fr; }.mission-entry.open .mission-description p { padding-block: 0 18px; }

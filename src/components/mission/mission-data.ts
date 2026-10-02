@@ -1,3 +1,7 @@
+import img1 from "./img1.jpeg";
+import img2 from "./img2.jpeg";
+import img3 from "./img3.jpeg";
+
 export const LOVE_LETTER = [
   "My Panda,",
   "If you're reading this, then you somehow managed to get through the entire system just to find this message. And honestly… that feels very you. 😂",
@@ -27,17 +31,17 @@ export const LOVE_LETTER = [
 ] as const;
 
 export const MISSION_ENTRIES = [
-  { id: "001", title: "THE BEGINNING", description: "[EDITABLE] The moment this mission first came online. Add your beginning here." },
-  { id: "002", title: "THE FIRST MEMORIES", description: "[EDITABLE] The early memories that made everything feel real." },
-  { id: "003", title: "THE CHAOS", description: "[EDITABLE] Arguments, nonsense, laughter, and somehow choosing each other anyway." },
-  { id: "004", title: "SOMEHOW STILL TOGETHER", description: "[EDITABLE] Against all system predictions, the connection remained stable." },
-  { id: "005", title: "FIVE MONTHS", description: "[EDITABLE] Level five complete. The next level is already loading." },
+  { id: "001", title: "THE BEGINNING", description: "You proposed to me first, and I kept denying you… and then somehow, on 2nd May, everything changed. We went to Chowpaty, explored around, had so much fun at Jump KATM, and then ended up at Band Hills, just sitting together, talking and kissing. And then I suddenly asked you, “बंदा बनोगे?” 😭 I still remember how shocked you looked because you absolutely did not expect me to be the one asking. And when you said yes, that became the beginning of us. ❤️" },
+  { id: "002", title: "THE FIRST MEMORIES", description: "I think some of my favourite memories are simply the little moments I've had with you — the random conversations, the stupid laughs, the time we spent together, and all those moments that didn't seem extraordinary when they happened but became so special because they were with you. Those were the moments when I started realizing just how much I love being with you." },
+  { id: "003", title: "THE CHAOS", description: "Since we're in long distance, sometimes we literally run out of things to talk about 😭 so obviously we had to find a solution — GAMES. Four in a Row, Monopoly, and every random game we can find. Half the time we're actually playing, and the other half we're just annoying each other. 😂 But I love that we always find something to do together, even when we're miles apart." },
+  { id: "004", title: "SOMEHOW STILL TOGETHER", description: "One thing I really love about you is the effort you make. Even when there's nothing to talk about, you don't just let the distance win. You go looking for games, things we can do together, little surprises, presents, anything that can make me smile. You always find some way to make me feel loved even when you can't be here. And maybe these things seem small to you, but they mean so much to me. I notice your effort, my love. And I love you for it. ❤️" },
+  { id: "005", title: "FIVE MONTHS", description: "Five months of us. ❤️ From me denying your proposal to me suddenly looking at you and asking “बंदा बनोगे?” — I honestly don't think either of us knew where that one question would take us. And now here we are, five months later, with all our memories, games, chaos, laughter, distance, gifts, love and everything in between. I don't know what the next levels of our story will look like, but I know I want to experience all of them with you. Happy 5 months, my Panda. I love you. ❤️" },
 ] as const;
 
 export const MEMORY_ITEMS = [
-  { id: "MEMORY_001", date: "[EDITABLE]", caption: "PHOTO FILE AWAITING RECOVERY", image: null },
-  { id: "MEMORY_002", date: "[EDITABLE]", caption: "PHOTO FILE AWAITING RECOVERY", image: null },
-  { id: "MEMORY_003", date: "[EDITABLE]", caption: "PHOTO FILE AWAITING RECOVERY", image: null },
+  { id: "MEMORY_001", date: "2 May 2026", caption: "PHOTO FILE AWAITING RECOVERY", image: img1 },
+  { id: "MEMORY_002", date: "that hug", caption: "PHOTO FILE AWAITING RECOVERY", image: img2 },
+  { id: "MEMORY_003", date: "US BEING US", caption: "PHOTO FILE AWAITING RECOVERY", image: img3 },
 ] as const;
 
 export const SYSTEM_MESSAGES = {
